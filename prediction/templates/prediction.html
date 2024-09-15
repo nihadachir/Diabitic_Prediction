@@ -1,0 +1,95 @@
+<!-- prediction/templates/prediction/prediction.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction System</title>
+    <style>
+         body {
+            background-image: url("{% static 'images/img2.jpg' %}");
+            display: flex;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .prediction-container {
+            background-color: #87CEEB; /* Bleu ciel */
+            padding: 20px;
+            border-radius: 10px;
+            width: 600px; /* Ajustez la largeur selon vos besoins */
+            margin: auto; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            font-size: 18px;
+            background-color: #032236;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="prediction-container">
+        <form method="post" action="{% url 'results' %}">
+            {% csrf_token %}
+            <label for="pregnancies">Pregnancies:</label>
+            <input type="number" name="pregnancies" step="0.01" value="{{ request.POST.pregnancies|default:'' }}"required><br>
+
+            <label for="glucose">Glucose:</label>
+            <input type="number" name="glucose"  step="0.01" value="{{ request.POST.glucose|default:'' }}"required><br>
+
+            <label for="blood_pressure">Blood Pressure:</label>
+            <input type="number" name="blood_pressure"  step="0.01"  value="{{ request.POST.blood_pressure|default:'' }}" required><br>
+
+            <label for="skin_thickness">Skin Thickness:</label>
+            <input type="number" name="skin_thickness" step="0.01"value="{{ request.POST.skin_thickness|default:'' }}"  required><br>
+
+            <label for="insulin">Insulin:</label>
+            <input type="number" name="insulin" step="0.01"  value="{{ request.POST.insulin|default:'' }}" required><br>
+
+            <label for="bmi">BMI:</label>
+            <input type="number" name="bmi" step="0.01"  value="{{ request.POST.bmi|default:'' }}" required><br>
+
+            <label for="diabetes">Diabetes:</label>
+            <input type="number" name="diabetes"  step="0.01"   value="{{ request.POST.diabetes|default:'' }}" required><br>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" value="{{ request.POST.age|default:'' }}"  required><br>
+
+            <button type="submit">Predict</button><br><br>
+            <div> <b>Diabetes Result :{{result2}}</b></div>
+        </form>
+    </div>
+</body>
+</html>
